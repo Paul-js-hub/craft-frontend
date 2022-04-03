@@ -7,7 +7,7 @@ const Update = ({id, updateTodo}) => {
       <>
         <svg
         xmlns="http://www.w3.org/2000/svg"
-        className="h-10 w-10 p-2 ml-4 mr-2 cursor-pointer"
+        className="h-10 w-10 p-2 ml-4 mr-2 cursor-pointer bg-teal-500 text-white font-medium rounded-xl hover:bg-teal-900"
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"

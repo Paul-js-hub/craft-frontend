@@ -1,21 +1,15 @@
 import React, { useState } from "react";
 import axios from 'axios'
-import { useNavigate } from "react-router-dom";
 const AddTodo = ({addTodo}) => {
   const [title, setTitle] = useState("")
   const [completed, setCompleted] = useState(false)
   // const [id, seID] = useState("")
-  const fd = new FormData()
-  fd.append('title', title)
-  fd.append('completed', completed)
-
   const onSubmit = (e) =>{
     e.preventDefault()
     axios.post(process.env.REACT_APP_API_URL + "/todos", {
       title, completed
     })
     .then(response =>{
-      console.log("RESPONSE", response)
       if(response.data.message === "Your todo has been successfully uploaded"){
         addTodo(title, completed)
       }

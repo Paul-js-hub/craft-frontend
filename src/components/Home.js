@@ -11,28 +11,27 @@ const Home = () => {
     useEffect(() => {
         let fetchTodos = async () => {
           const result = await axios(process.env.REACT_APP_API_URL + "/todos");
+          console.log("RESULT", result)
           setTodos(result.data);
         };
         fetchTodos();
       }, []);
 
-      const addTodo = (title, completed) =>{
-        console.log("Title>>>>", title)
-        console.log("compl", completed)
-        let copy = [...todos]
-        copy.push({title, completed})
-        setTodos(copy)
-      }
-
       let fetchTodos = async () => {
         const result = await axios(process.env.REACT_APP_API_URL + "/todos");
+        console.log("result>>>", result)
         setTodos(result.data);
       };
 
+      const addTodo = (title, completed) =>{
+        let copy = [...todos]
+        copy.push({title, completed})
+        fetchTodos()
+      }
+
       const deleteTodo = (id) =>{
         axios.delete(process.env.REACT_APP_API_URL + `/todos/${id}`)
-        .then((res) =>{
-        //  setTodos([...todos].filter(todo => todo.id !== id))
+        .then(() =>{
         fetchTodos()
         })
         .catch(err =>{
@@ -41,12 +40,11 @@ const Home = () => {
       }
 
       const updateTodo = (todo) =>{
-        console.log("TODO", todo)
         const newTodo = {title: todo.title}
         //console.log("NEWTODO", newTodo)
         axios.put(process.env.REACT_APP_API_URL + `/todos/${todo.id}`, newTodo)
         .then(() =>{
-          navigate("/")
+          navigate("/home")
           fetchTodos()
         })
         .catch(err =>{
@@ -60,6 +58,7 @@ const Home = () => {
         <h1 className='text-3xl font-bold text-center'>My Todos</h1>
         <AddTodo addTodo={addTodo}/>
         </div>
+        <div className='grid justify-items-center'>
         {todos.map(todo => {
           return (
             <Todo 
@@ -72,6 +71,7 @@ const Home = () => {
             />
           );
         })}
+        </div>
         </div>
     </div>
   )

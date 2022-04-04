@@ -43,7 +43,7 @@ const Register = () => {
         <div className="text-primary m-6">
           <div className="flex items-center mt-3 justify-center">
             <h1 className="text-2xl font-medium text-primary mt-4 mb-2">
-              Signup an account for free
+              Signup to add Your Todos
             </h1>
           </div>
           <form>
